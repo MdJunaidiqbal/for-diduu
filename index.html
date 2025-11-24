@@ -1,53 +1,137 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Happy Birthday Didi 🎉</title>
+    <title>Happy Birthday 🎀✨</title>
+    <style>
+        body {
+            margin: 0;
+            background: linear-gradient(to bottom right, #ffb6ff, #ffdae9);
+            overflow-x: hidden;
+            font-family: "Poppins", sans-serif;
+            text-align: center;
+        }
 
-<style>
-  body {
-    margin: 0;
-    background: linear-gradient(135deg, #8b5cf6, #ec4899);
-    font-family: 'Poppins', sans-serif;
-    color: white;
-    text-align: center;
-    padding: 40px;
-  }
-  h1 {
-    font-size: 40px;
-    margin-top: 60px;
-  }
-  p {
-    font-size: 18px;
-    max-width: 400px;
-    margin: auto;
-    opacity: 0.9;
-  }
-  .confetti {
-    font-size: 40px;
-    margin-top: 20px;
-  }
-  .box {
-    background: rgba(255, 255, 255, 0.15);
-    padding: 20px;
-    border-radius: 20px;
-    margin-top: 40px;
-    backdrop-filter: blur(10px);
-  }
-</style>
+        h1 {
+            color: white;
+            font-size: 40px;
+            margin-top: 30px;
+            text-shadow: 0 0 10px #ff4fa8;
+        }
+
+        input {
+            padding: 12px 20px;
+            width: 80%;
+            border: none;
+            border-radius: 25px;
+            font-size: 18px;
+            margin-top: 20px;
+            box-shadow: 0 0 10px pink;
+        }
+
+        #wishMsg {
+            display: none;
+            font-size: 24px;
+            color: #ff2f92;
+            font-weight: bold;
+            margin-top: 30px;
+            animation: fadeIn 2s forwards;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+
+        .heart {
+            position: fixed;
+            bottom: -10px;
+            font-size: 25px;
+            animation: floatUp 5s linear infinite;
+            color: #ff77b7;
+            opacity: 0.7;
+        }
+
+        @keyframes floatUp {
+            0% {transform: translateY(0); opacity: 1;}
+            100% {transform: translateY(-800px); opacity: 0;}
+        }
+
+        .balloon {
+            position: fixed;
+            bottom: -150px;
+            font-size: 40px;
+            animation: rise 6s ease-in infinite;
+        }
+
+        @keyframes rise {
+            0% {transform: translateY(0);}
+            100% {transform: translateY(-900px);}
+        }
+    </style>
 </head>
-
 <body>
-  <div class="confetti">🎉✨🎉</div>
-  <h1>Happy Birthday Didi! 🎂</h1>
 
-  <div class="box">
-    <p>
-      This is a small digital surprise made just for you!  
-      Wishing you a wonderful year full of happiness, success,  
-      and beautiful moments. 💜
-    </p>
-  </div>
+    <h1>🎀 Happy Birthday 🎀</h1>
+
+    <input id="commandInput" placeholder="Type: balloons, song, wish, magic" />
+
+    <div id="wishMsg">
+        💖 Wishing you the happiest birthday!  
+        You deserve all the love, joy, and smiles today and forever 💖🎀✨
+    </div>
+
+    <audio id="bdaySong">
+        <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_0b1ff3fa52.mp3?filename=birthday-112194.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const input = document.getElementById("commandInput");
+        const wishMsg = document.getElementById("wishMsg");
+        const song = document.getElementById("bdaySong");
+
+        input.addEventListener("keydown", function (e) {
+            if (e.key === "Enter") {
+                let cmd = input.value.toLowerCase();
+                input.value = "";
+
+                if (cmd === "wish") {
+                    wishMsg.style.display = "block";
+                }
+
+                if (cmd === "song") {
+                    song.play();
+                }
+
+                if (cmd === "balloons") {
+                    for (let i = 0; i < 10; i++) {
+                        let b = document.createElement("div");
+                        b.className = "balloon";
+                        b.innerHTML = "🎈";
+                        b.style.left = Math.random() * window.innerWidth + "px";
+                        b.style.animationDuration = (4 + Math.random() * 3) + "s";
+                        document.body.appendChild(b);
+
+                        setTimeout(() => b.remove(), 6000);
+                    }
+                }
+
+                if (cmd === "magic") {
+                    for (let i = 0; i < 15; i++) {
+                        let h = document.createElement("div");
+                        h.className = "heart";
+                        h.innerHTML = "💖";
+                        h.style.left = Math.random() * window.innerWidth + "px";
+                        h.style.animationDuration = (3 + Math.random() * 3) + "s";
+                        document.body.appendChild(h);
+
+                        setTimeout(() => h.remove(), 5000);
+                    }
+                }
+            }
+        });
+    </script>
+
 </body>
 </html>
+
+
